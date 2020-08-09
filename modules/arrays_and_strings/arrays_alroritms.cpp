@@ -159,8 +159,8 @@ std::string strCompression(const std::string& s) {
 vector<int> rotate(vector<int> mat, int n) {
     if (n*n != mat.size()) return { -1 };
     vector<int> res(mat.size());
-    for (size_t i = 0; i < n; ++i)
-        for (size_t j = 0; j < n; ++j)
+    for (int i = 0; i < n; ++i)
+        for (int j = 0; j < n; ++j)
             res[(n-j-1)*n+i] = mat[i*n + j];
     return res;
 }
@@ -168,8 +168,8 @@ vector<int> rotate(vector<int> mat, int n) {
 vector<int> rotateInPlace(vector<int> mat, int n) {
     if (n*n != mat.size()) return mat;
 
-    for (size_t i = 0; i < n / 2; ++i)
-        for (size_t j = i; j < n - i - 1; ++j) {
+    for (int i = 0; i < n / 2; ++i)
+        for (int j = i; j < n - i - 1; ++j) {
             int tmp = mat[(n - j - 1)*n + i];
             mat[(n - j - 1)*n + i] = mat[i*n + j];  // copy top to the left
             mat[i*n + j] = mat[j*n + n - i - 1];  // copy right to the top
