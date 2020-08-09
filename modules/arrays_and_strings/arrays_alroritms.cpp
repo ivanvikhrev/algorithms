@@ -48,10 +48,9 @@ bool allUniqueBruteForce(string s) {
 
 // haven't checked error cases
 string inverse(char* str) {
-    int n = 0;
     string tmp(str);
 
-    for (int i = 0; i < tmp.size() / 2; ++i) {
+    for (size_t i = 0; i < tmp.size() / 2; ++i) {
         char ch = tmp[i];
         tmp[i] = tmp[tmp.size()-1 -i];
         tmp[tmp.size() - 1 - i] = ch;
@@ -63,8 +62,8 @@ string inverse(char* str) {
 bool isPermBruteForce(std::string s1, std::string s2) {
     if (s1.size() != s2.size()) return false;
 
-    for (int i = 0; i < s1.size(); ++i) {
-        for (int j = 0; j < s2.size(); ++j) {
+    for (size_t i = 0; i < s1.size(); ++i) {
+        for (size_t j = 0; j < s2.size(); ++j) {
             if (s1[i] == s2[j]) {
                 s2[j] = '\0';
                 break;
@@ -82,7 +81,7 @@ bool isPerm(const std::string& s1, const std::string& s2) {
     unordered_map<char, int> umap1;
     unordered_map<char, int> umap2;
 
-    for (int i = 0; i < s1.size(); ++i) {
+    for (size_t i = 0; i < s1.size(); ++i) {
         if (umap1.find(s1[i]) == umap1.end())
             umap1.insert({ s1[i], 1 });
         else
@@ -107,8 +106,8 @@ string URLify(char* s, int n) {
             for (int j = newN - 1; j > i; --j) {
                 tmp[j + offset] = tmp[j];
             }
-            for (int k = i; k <= i + offset; ++k) {
-                tmp[k] = subs[k - i];
+            for (int k = 0; k <= offset; ++k) {
+                tmp[i+k] = subs[k];
             }
             newN = newN + offset;
         }
@@ -118,7 +117,7 @@ string URLify(char* s, int n) {
 
 bool oneAway(std::string s1, std::string s2) {
     if (abs(static_cast<int>(s1.size() - s2.size())) <= 1) {
-        int i = 0, j = 0, mismatch = 0;
+        size_t i = 0, j = 0, mismatch = 0;
         while (i < s1.size() && j < s2.size()) {
             if (s1[i] == s2[j]) {
                 ++i;
@@ -143,7 +142,7 @@ bool oneAway(std::string s1, std::string s2) {
 std::string strCompression(const std::string& s) {
     string res;
     int count = 1;
-    for (int i = 0; i < s.size() - 1; ++i) {
+    for (size_t i = 0; i < s.size() - 1; ++i) {
         if (s[i] == toupper(s[i + 1]) || s[i] == tolower(s[i + 1])) {
             ++count;
             continue;
@@ -160,8 +159,8 @@ std::string strCompression(const std::string& s) {
 vector<int> rotate(vector<int> mat, int n) {
     if (n*n != mat.size()) return { -1 };
     vector<int> res(mat.size());
-    for (int i = 0; i < n; ++i)
-        for (int j = 0; j < n; ++j)
+    for (size_t i = 0; i < n; ++i)
+        for (size_t j = 0; j < n; ++j)
             res[(n-j-1)*n+i] = mat[i*n + j];
     return res;
 }
@@ -169,8 +168,8 @@ vector<int> rotate(vector<int> mat, int n) {
 vector<int> rotateInPlace(vector<int> mat, int n) {
     if (n*n != mat.size()) return mat;
 
-    for (int i = 0; i < n / 2; ++i)
-        for (int j = i; j < n - i - 1; ++j) {
+    for (size_t i = 0; i < n / 2; ++i)
+        for (size_t j = i; j < n - i - 1; ++j) {
             int tmp = mat[(n - j - 1)*n + i];
             mat[(n - j - 1)*n + i] = mat[i*n + j];  // copy top to the left
             mat[i*n + j] = mat[j*n + n - i - 1];  // copy right to the top
@@ -206,7 +205,6 @@ void DFS(vector<int>& v, int N, int M, pair<int, int> p) {
 
 int numberOfIslands(vector<int> v, int N, int M) {
     stack<pair<int, int>> s;
-    int i = 0, j = 0;
     int count = 0;
 
     for (int i = 0; i < N; ++i) {
