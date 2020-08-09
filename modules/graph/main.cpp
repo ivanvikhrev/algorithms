@@ -7,7 +7,7 @@
 
 using std::vector;
 
-TEST(graph, can_create) {
+TEST(graph, can_create_graph) {
     vector<vector<int>> adj = { {1, 3}, {0, 2, 3}, {1, 4, 5}, {0, 1, 4}, {2, 3}, {2} };
     Graph g(adj.size(), adj);
     g.BFS();
