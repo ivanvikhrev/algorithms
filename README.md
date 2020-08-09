@@ -1,2 +1,2 @@
 # Algorithms
-repository for learning &amp; testing algorithms
+repository for learning & testing algorithms
