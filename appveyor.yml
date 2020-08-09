@@ -15,8 +15,7 @@ build_script:
   - cmd: python scripts/lint.py
   - cmd: mkdir build
   - cmd: cd build
-  - cmd: cmake -G "%CMAKE_GENERATOR%" ^
-               -A Win32
+  - cmd: cmake -G "%CMAKE_GENERATOR%" .. -A Win32
   - cmd: cmake --build .
   - cmd: cd ..
   - cmd: scripts/run.bat
