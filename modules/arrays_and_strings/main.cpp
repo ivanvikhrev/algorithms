@@ -180,7 +180,7 @@ TEST_P(MatrixParameterizedTestFixture, check_correctness_in_place_rotate_functio
     ASSERT_EQ(rotateInPlace(mat, static_cast<int>(sqrt(mat.size()))), expected);
 }
 
-INSTANTIATE_TEST_CASE_P(
+INSTANTIATE_TEST_SUITE_P(
     RotateTest,
     MatrixParameterizedTestFixture,
     ::testing::Values(
@@ -204,7 +204,7 @@ TEST_P(NumberOfIslandsParameterizedTestFixture, check_correctness_number_of_isla
 }
 
 
-INSTANTIATE_TEST_CASE_P(
+INSTANTIATE_TEST_SUITE_P(
     RotateTest,
     NumberOfIslandsParameterizedTestFixture,
     ::testing::Values(

@@ -47,7 +47,7 @@ bool allUniqueBruteForce(string s) {
 }
 
 // haven't checked error cases
-string inverse(char* str) {
+string inverse(const char* str) {
     string tmp(str);
 
     for (size_t i = 0; i < tmp.size() / 2; ++i) {
@@ -96,7 +96,7 @@ bool isPerm(const std::string& s1, const std::string& s2) {
     return umap1 == umap2;
 }
 
-string URLify(char* s, int n) {
+string URLify(const char* s, int n) {
     string tmp(s);
     char subs[] = "%20";
     int offset = 2;
