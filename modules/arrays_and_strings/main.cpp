@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <tuple>
+#include <cmath>
 #include <algorithm>
 #include <unordered_set>
 #include <vector>
@@ -171,13 +172,13 @@ class MatrixParameterizedTestFixture : public ::testing::TestWithParam<std::tupl
 TEST_P(MatrixParameterizedTestFixture, check_correctness_rotate_function) {
     vector<int> mat = std::get<0>(GetParam());
     vector<int> expected = std::get<1>(GetParam());
-    ASSERT_EQ(rotate(mat, static_cast<int>(sqrt(mat.size()))), expected);
+    ASSERT_EQ(rotate(mat, static_cast<int>(std::sqrt(mat.size()))), expected);
 }
 
 TEST_P(MatrixParameterizedTestFixture, check_correctness_in_place_rotate_function) {
     vector<int> mat = std::get<0>(GetParam());
     vector<int> expected = std::get<1>(GetParam());
-    ASSERT_EQ(rotateInPlace(mat, static_cast<int>(sqrt(mat.size()))), expected);
+    ASSERT_EQ(rotateInPlace(mat, static_cast<int>(std::sqrt(mat.size()))), expected);
 }
 
 INSTANTIATE_TEST_SUITE_P(
@@ -200,7 +201,8 @@ class NumberOfIslandsParameterizedTestFixture : public ::testing::TestWithParam<
 TEST_P(NumberOfIslandsParameterizedTestFixture, check_correctness_number_of_islands) {
     vector<int> mat = std::get<0>(GetParam());
     int expected = std::get<1>(GetParam());
-    ASSERT_EQ(numberOfIslands(mat, static_cast<int>(sqrt(mat.size())), static_cast<int>(sqrt(mat.size()))), expected);
+    ASSERT_EQ(numberOfIslands(mat, static_cast<int>(std::sqrt(mat.size())),
+                                   static_cast<int>(std::sqrt(mat.size()))), expected);
 }
 
 
