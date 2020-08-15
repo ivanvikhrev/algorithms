@@ -1,15 +1,23 @@
+// Copyright 2020 Vikhrev Ivan
+
 #include <vector>
 #include <iostream>
-#include "Graph.h"
-using namespace std;
+#include <utility>
+#include "gtest/gtest.h"
+#include "../../modules/graph/Graph.h"
+
+using std::vector;
+using std::pair;
+TEST(graph, can_create_graph) {
+    vector<vector<pair<int, int>>> adj = { {{1, 1}, {3, 1}}, {{0, 1}, {2, 1}, {3, 1}},
+                                           {{1, 1}, {4, 1}, {5, 1}}, {{0, 1}, {1, 1}, {4, 1}},
+                                           {{2, 1}, {3, 1}}, {{2, 1}} };
+    Graph g(adj.size(), adj);
+    g.dijkstra(0);
+    ASSERT_EQ(g.dijkstra(0), vector<int>{1});
+}
+
 int main(int argc, char* argv[]) {
-	
-	vector<vector<int>> adj = { {1,3}, {0,2,3}, {1,4,5}, {0,1,4}, {2,3}, {2} };
-	vector<vector<int>> adj2 = { {1}, {2}, {5}, {0,4}, {1,2}, {5} };
-	Graph g(adj.size(), adj2);
-	g.DFS();
-	int *p = nullptr;
-	int &r = *p;
-	cout << p << endl;
-	return 0;
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }

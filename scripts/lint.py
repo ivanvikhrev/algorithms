@@ -28,7 +28,7 @@ for dirs, node, files in os.walk(project_directory):
             if re.search(r'(modules)', dirs) != None:
                 os.chdir(dirs)
                 print(dirs + " -> " + file)
-                command = sys.executable + ' ' + cpplint_path + ' --linelength=120 ' + file
+                command = sys.executable + ' ' + cpplint_path + ' --linelength=120 ' + '--filter=-runtime/references '  + file
                 status = StartTests(command)
                 if status:
                     print("\033[0;32mSuccess: " + file + "\033[0;0m");
