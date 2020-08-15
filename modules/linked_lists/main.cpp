@@ -165,7 +165,7 @@ TEST_P(ListParameterizedTestFixture, can_remove_duplicates_without_temporary_buf
     ASSERT_EQ(l, expected);
 }
 
-INSTANTIATE_TEST_CASE_P(
+INSTANTIATE_TEST_SUITE_P(
     RemoveDuplicatesTest,
     ListParameterizedTestFixture,
     ::testing::Values(
