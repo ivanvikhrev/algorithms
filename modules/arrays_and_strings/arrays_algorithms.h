@@ -7,10 +7,10 @@
 
 bool allUnique(std::string s);
 bool allUniqueBruteForce(std::string s);
-std::string inverse(char* str);
+std::string inverse(const char* str);
 bool isPermBruteForce(std::string s1, std::string s2);
 bool isPerm(const std::string& s1, const std::string& s2);
-std::string URLify(char* s, int n);
+std::string URLify(const char* s, int n);
 bool isPalindromePerm(std::string s);
 bool oneAway(std::string s1, std::string s2);
 std::string strCompression(const std::string& s);
