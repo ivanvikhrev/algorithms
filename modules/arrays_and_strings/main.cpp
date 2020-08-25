@@ -224,6 +224,28 @@ INSTANTIATE_TEST_SUITE_P(
         std::make_tuple<vector<int>>({ 0, 0, 0, 0, 1, 0, 0, 0, 0 }, 1),
         std::make_tuple<vector<int>>({ 1, 1, 1, 0, 0, 1, 1, 0, 0 }, 2)));
 
+class PalindromeTestFixture : public ::testing::TestWithParam<std::tuple<std::string, bool>> {};
+
+TEST_P(PalindromeTestFixture,  correctness_is_palindrome) {
+    std::string s = std::get<0>(GetParam());
+    bool expected = std::get<1>(GetParam());
+    ASSERT_EQ(isPalindrome(s), expected);
+}
+
+
+INSTANTIATE_TEST_SUITE_P(
+    IsPalindrome,
+    PalindromeTestFixture,
+    ::testing::Values(
+        std::make_tuple<std::string>("a", true),
+        std::make_tuple<std::string>("ab", false),
+        std::make_tuple<std::string>("aa", true),
+        std::make_tuple<std::string>("aaaa", true),
+        std::make_tuple<std::string>("baab", true),
+        std::make_tuple<std::string>("aabaa", true),
+        std::make_tuple<std::string>("nolemonnomelon", true),
+        std::make_tuple<std::string>("nolemoannomelon", false),
+        std::make_tuple<std::string>("level", true)));
 
 int main(int argc, char** argv) {
     ::testing::InitGoogleTest(&argc, argv);
