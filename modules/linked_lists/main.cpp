@@ -174,7 +174,43 @@ INSTANTIATE_TEST_SUITE_P(
         std::make_tuple<List, List>({ 1, 1, 1, 1 }, { 1 }),
         std::make_tuple<List, List>({ 1, 1, 1, 0 }, { 1, 0 }),
         std::make_tuple<List, List>({ 1, 2, 3, 4, 5, 6, 7, 8, 9}, { 1, 2, 3, 4, 5, 6, 7, 8, 9}),
-        std::make_tuple<List, List>({ 1, 1, 1, 2, 3, 3, 4, 5, 6, 6, 7, 8, 9, 9, 9}, { 1, 2, 3, 4, 5, 6, 7, 8, 9})));
+        std::make_tuple<List, List>
+                ({ 1, 1, 1, 2, 3, 3, 4, 5, 6, 6, 7, 8, 9, 9, 9}, { 1, 2, 3, 4, 5, 6, 7, 8, 9})));
+
+class ListParameterizedWith3ParamsTestFixture :
+        public ::testing::TestWithParam<std::tuple<std::tuple<List, int>, List>> {};
+
+TEST_P(ListParameterizedWith3ParamsTestFixture, can_rearrange) {
+    List l = std::get<0>(std::get<0>(GetParam()));
+    int x = std::get<1>(std::get<0>(GetParam()));
+    List expected = std::get<1>(GetParam());
+    l.rearrange(x);
+    std::cout << l << std::endl;
+    ASSERT_EQ(l, expected);
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    RearrangeTest,
+    ListParameterizedWith3ParamsTestFixture,
+    ::testing::Values(
+        std::make_tuple<std::tuple<List, int>, List>
+            (std::make_tuple<List, int>({1}, 1), {1}),
+        std::make_tuple<std::tuple<List, int>, List>
+            (std::make_tuple<List, int>({5, 1}, 3), {1, 5}),
+        std::make_tuple<std::tuple<List, int>, List>
+            (std::make_tuple<List, int>({5, 1, 1, 1}, 3), {1, 1, 1, 5}),
+        std::make_tuple<std::tuple<List, int>, List>
+            (std::make_tuple<List, int>({5, 4, 2, 1, 2, 3, 4, 5}, 2), {1, 5, 4, 2, 2, 3, 4, 5}),
+        std::make_tuple<std::tuple<List, int>, List>
+            (std::make_tuple<List, int>({1, 2, 3, 4, 5, 6, 7}, 3), {1, 2, 3, 4, 5, 6, 7}),
+        std::make_tuple<std::tuple<List, int>, List>
+            (std::make_tuple<List, int>({ 4, 4, 4, 1, 1, 8, 8, 0, 0, 0 }, 2), {1, 1, 0, 0, 0, 4, 4, 4, 8, 8})));
+
+
+TEST(List, kth_from_the_end) {
+    List l1{ 1, 2, 3, 4, 5, 6, 7};
+    ASSERT_EQ(l1.find_k_from_end(6), 1);
+}
 
 int main(int argc, char* argv[]) {
     ::testing::InitGoogleTest(&argc, argv);

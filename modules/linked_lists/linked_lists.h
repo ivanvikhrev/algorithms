@@ -34,9 +34,11 @@ class List {
     bool operator==(const List& l) const;
     bool operator!=(const List& l) const {return !(*this == l);}
     friend std::ostream& operator<<(std::ostream& os, const List& l);
-
     void remove_duplicates1();
     void remove_duplicates2();
+    void rearrangeBadImpl(int x);
+    void rearrange(int x);
+    int find_k_from_end(int k);
 };
 
 #endif  // MODULES_LINKED_LISTS_LINKED_LISTS_H_

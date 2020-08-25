@@ -137,6 +137,82 @@ void List::remove_duplicates2() {
     }
 }
 
+// not stable
+void List::rearrangeBadImpl(int x) {
+    Node* start, *end, *curr;
+    start = end = curr = head;
+    curr = curr->next;
+    while (curr) {
+        Node* tmp = curr;
+        curr = curr->next;
+        if (tmp->data < x) {
+            tmp->next = start;
+            start = tmp;
+        } else {
+            end->next = tmp;
+            end = tmp;
+        }
+    }
+    end->next = nullptr;
+    head = start;
+}
+
+// stable
+void List::rearrange(int x) {
+    if (head) {
+        Node *lessHead = nullptr, *lessCurr = nullptr,
+             *greaterHead = nullptr, *greaterCurr = nullptr,
+             *curr = nullptr;
+
+        curr = head;
+        while (curr) {
+            Node* tmp = curr;
+            curr = curr->next;
+            if (tmp->data < x) {
+                if (!lessHead) {
+                    lessHead = tmp;
+                    lessCurr = lessHead;
+                } else {
+                    lessCurr->next = tmp;
+                    lessCurr = lessCurr->next;
+                }
+                lessCurr->next = nullptr;
+            } else {
+                if (!greaterHead) {
+                    greaterHead = tmp;
+                    greaterCurr = greaterHead;
+                } else {
+                    greaterCurr->next = tmp;
+                    greaterCurr = greaterCurr->next;
+                }
+                greaterCurr->next = nullptr;
+            }
+        }
+        if (lessHead) {
+            head = lessHead;
+            lessCurr->next = greaterHead;
+        } else {
+            head = greaterHead;
+        }
+    }
+}
+
+// assuming that 0 from end is end
+int List::find_k_from_end(int k) {
+    Node* curr = head;
+    Node* kth = head;
+    int i = 0;
+
+    while (curr) {
+        if (i > k) {
+            kth = kth->next;
+        }
+        ++i;
+        curr = curr->next;
+    }
+
+    return kth->data;
+}
 std::ostream& operator<<(std::ostream& os, const List& l) {
     Node *curr = l.head;
     if (l.head) {

@@ -8,6 +8,7 @@
 #include <utility>
 #include <unordered_set>
 #include <unordered_map>
+#include <cmath>
 #include "../../modules/arrays_and_strings/arrays_algorithms.h"
 
 using std::vector;
@@ -217,4 +218,16 @@ int numberOfIslands(vector<int> v, int N, int M) {
     }
 
     return count;
+}
+
+bool isPalindrome(const std::string& s) {
+    for (size_t i = 0; i < s.size() / 2; ++i) {
+        if (s[i] != s[s.size() - i - 1])
+            return false;
+    }
+    return true;
+}
+
+void perm(const std::string& s) {
+    std::vector<bool> chosen(s.size());
 }
